@@ -1,0 +1,9 @@
+ua.edu.shopcart.application
+ua.edu.shopcart.controller
+ua.edu.shopcart.demo
+ua.edu.shopcart.domain
+ua.edu.shopcart.payment
+ua.edu.shopcart.pricing
+ua.edu.shopcart.repository
+ua.edu.shopcart.service
+ua.edu.shopcart.view

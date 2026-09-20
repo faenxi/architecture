@@ -1,94 +1,43 @@
-# Лабораторна робота №1. Принципи GRASP
-## Предметна область: Кошик інтернет-магазину
+# Кошик інтернет-магазину — ЛР №1 GRASP і ЛР №2 SOLID
 
-## 1. Класи предметної області (6 шт., мінімум 5 виконано)
+Авторки: **Бикова Поліна та Гудан Ванесса**.
 
-| Клас | Роль |
-|---|---|
-| `Product` | товар: id, назва, ціна, категорія |
-| `Customer` | клієнт: id, ім'я, email, адреса |
-| `CartItem` | рядок кошика: товар + кількість |
-| `ShoppingCart` | кошик: список рядків, промокод |
-| `Order` | замовлення: клієнт, рядки, сума, статус |
-| `PaymentProcessor` + 3 реалізації | спосіб оплати |
+У репозиторії виконано дві лабораторні роботи з принципів проєктування ПЗ
+мовою Java в одній предметній області — кошик інтернет-магазину.
 
-Зв'язки: `ShoppingCart` *агрегує* `CartItem` (композиція); `CartItem`
-*асоційований* з `Product`; `Customer` *асоційований* з `Order`;
-`Order` *агрегує* `CartItem`; `CardPayment`/`CashOnDeliveryPayment`/
-`PayPalPayment` *успадковують* (реалізують) `PaymentProcessor`.
+## Готова версія двох лабораторних
 
-## 2. Відповідність принципів GRASP коду
+Повний проєкт розміщено в каталозі
+[`online-store-cart-java/`](online-store-cart-java/).
 
-| Принцип | Де застосовано |
-|---|---|
-| **Information Expert** | `Product.getPrice()`, `CartItem.getSubtotal()` — кожен клас рахує те, для чого має дані |
-| **Creator** | `ShoppingCart` створює `CartItem`; `Customer.createOrder()` створює `Order` |
-| **Controller** | `CartController` — приймає зовнішні запити (додати в кошик, оформити) і координує роботу |
-| **Low Coupling** | `Order`/`ShoppingCart` залежать лише від інтерфейсу `PaymentProcessor`, не від конкретних платіжних систем |
-| **High Cohesion** | `ShoppingCart` відповідає лише за рядки кошика; знижки винесені в `PriceCalculator` |
-| **Polymorphism** | `CardPayment`, `CashOnDeliveryPayment`, `PayPalPayment` по-різному реалізують `pay()` |
-| **Pure Fabrication** | `PriceCalculator`, `NotificationService` — штучні класи поза доменною моделлю |
-| **Indirection** | `PriceCalculator` — посередник між `ShoppingCart` і правилами знижок |
-| **Protected Variations** | `PaymentProcessor` — стабільний інтерфейс, що ховає мінливі реалізації оплати |
+- [Звіт до ЛР №1 — GRASP](online-store-cart-java/reports/LR1_GRASP_Online_Store_Cart.docx)
+- [Звіт до ЛР №2 — SOLID](online-store-cart-java/reports/LR2_SOLID_Online_Store_Cart.docx)
+- [Матеріал для захисту](online-store-cart-java/reports/Defense_Guide_GRASP_SOLID.docx)
+- [Опис реалізації GRASP](online-store-cart-java/docs/REPORT_LAB1_GRASP.md)
+- [Опис реалізації SOLID](online-store-cart-java/docs/REPORT_LAB2_SOLID.md)
+- [Згенерована Javadoc](online-store-cart-java/docs/javadoc/index.html)
 
-## 3. Заглушки бізнес-логіки
+ЛР №1 демонструє всі 9 принципів GRASP: Information Expert, Creator,
+Controller, Low Coupling, High Cohesion, Polymorphism, Pure Fabrication,
+Indirection і Protected Variations.
 
-Реальні зовнішні інтеграції (виклик банківського API, PayPal API,
-надсилання email) замінені заглушками, які виводять у консоль назву
-методу та його аргументи (див. `[STUB] ...` у `CardPayment`,
-`CashOnDeliveryPayment`, `PayPalPayment`, `NotificationService`).
-Уся інша логіка (додавання в кошик, розрахунок суми, зміна стану
-замовлення) реалізована повністю.
+ЛР №2 демонструє всі 5 принципів SOLID: SRP, OCP, LSP, ISP і DIP.
 
-## 4. Як запустити
+У системі є 8 предметних класів, наслідування, агрегація та асоціація.
+Зовнішні операції оплати, збереження й надсилання чека реалізовано
+консольними заглушками згідно з вимогами методичних вказівок.
 
-```
-cd src
-javac shop/*.java
-java shop.Main
+## Запуск
+
+Потрібен JDK 17 або новіший:
+
+```bash
+cd online-store-cart-java
+./run.sh lab1
+./run.sh lab2
+./run.sh test
+./run.sh javadoc
 ```
 
-## 5. Документація (Javadoc)
-
-Усі класи, поля та методи мають Javadoc-коментарі. Автоматично
-згенерувати HTML-документацію:
-
-```
-cd src
-javadoc -d ../docs -encoding UTF-8 -charset UTF-8 shop/*.java
-```
-
-Після цього відкрити `docs/index.html`.
-
-## 6. Що зробити для здачі лабораторної роботи
-
-1. **Перевірити компіляцію та запуск** командами з п. 4 — переконатися,
-   що консоль виводить очікуваний сценарій (додавання товарів,
-   застосування промокоду, оформлення двох замовлень різними
-   способами оплати).
-2. **Згенерувати Javadoc** (п. 5) і додати папку `docs/` до здачі —
-   викладачі зазвичай перевіряють саме наявність автоматично
-   згенерованої документації, а не лише коментарів у коді.
-3. **Підготувати короткий звіт** (1-2 стор.), що містить:
-   - теоретичний опис 9 принципів GRASP (за методичкою);
-   - таблицю "принцип → клас/метод" (див. розділ 2 цього README —
-     можна взяти за основу);
-   - UML-діаграму класів (можна намалювати в draw.io / PlantUML на
-     основі списку класів та зв'язків із розділу 1).
-4. **Бути готовим на захисті пояснити**, чому саме такий клас відповідає
-   за таку роботу — це і є суть GRASP. Типові питання викладача:
-   - "Чому `ShoppingCart` не рахує знижки сам?" → High Cohesion +
-     Indirection через `PriceCalculator`.
-   - "Що станеться, якщо додати оплату Apple Pay?" → достатньо
-     створити новий клас, що реалізує `PaymentProcessor`; `Order` і
-     `CartController` не зміняться (Protected Variations, Low Coupling).
-   - "Де тут Pure Fabrication і чому не можна обійтися без нього?" →
-     `PriceCalculator`/`NotificationService` не є сутностями предметної
-     області, введені штучно заради розподілу відповідальностей.
-5. **Зберегти цю саму предметну область** — за методичкою вона
-   використовується й надалі в лабораторній №2 (SOLID), тому наступного
-   разу цей самий проєкт треба буде розширити принципами SRP, OCP,
-   LSP, ISP, DIP, не змінюючи вже узгоджену структуру класів.
-6. Здати викладачу: вихідний код (`src/`), згенеровану документацію
-   (`docs/`), звіт та бути готовим продемонструвати роботу програми
-   наживо на захисті.
+Попередню реалізацію ЛР №1 залишено в каталогах `src/` і `docs/`, щоб не
+видаляти історичні файли репозиторію.

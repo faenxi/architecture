@@ -41,3 +41,14 @@ cd online-store-cart-java
 
 Попередню реалізацію ЛР №1 залишено в каталогах `src/` і `docs/`, щоб не
 видаляти історичні файли репозиторію.
+
+## Продовження: лабораторні №3–8
+
+Проєкт з породжувальними та структурними шаблонами знаходиться у
+[`online-store-cart-java/labs3-8-patterns/`](online-store-cart-java/labs3-8-patterns/).
+Він містить Singleton, Prototype, Factory Method, Abstract Factory, Builder,
+Object Pool, Adapter, Bridge, Composite, Flyweight, Decorator і Proxy.
+
+Для демонстрації й перевірки перейдіть до цієї папки та виконайте
+`./run.sh demo` або `./run.sh test`. Javadoc розміщено в
+[`docs/index.html`](online-store-cart-java/labs3-8-patterns/docs/index.html).

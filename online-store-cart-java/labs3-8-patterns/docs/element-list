@@ -1,0 +1,11 @@
+shop
+shop.adapter
+shop.bridge
+shop.builder
+shop.checkout
+shop.composite
+shop.decorator
+shop.flyweight
+shop.notification
+shop.pool
+shop.proxy

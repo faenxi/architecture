@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"shop"},{"l":"shop.adapter"},{"l":"shop.bridge"},{"l":"shop.builder"},{"l":"shop.checkout"},{"l":"shop.composite"},{"l":"shop.decorator"},{"l":"shop.flyweight"},{"l":"shop.notification"},{"l":"shop.pool"},{"l":"shop.proxy"}];updateSearchResults();
